@@ -189,6 +189,7 @@ magicCode x = MagicCode (code x `xor` 0x45696730)
 #api2 sparse_adjoint,       "CSparseMatrixPtr a b -> Ptr (CSparseMatrixPtr a b) -> IO CString"
 #api2 sparse_pruned,        "CSparseMatrixPtr a b -> Ptr (CSparseMatrixPtr a b) -> IO CString"
 #api2 sparse_prunedRef,     "CSparseMatrixPtr a b -> Ptr b -> Ptr (CSparseMatrixPtr a b) -> IO CString"
+#api2 sparse_pruned_mul,    "CSparseMatrixPtr a b -> CSparseMatrixPtr a b -> Ptr b -> Ptr (CSparseMatrixPtr a b) -> IO CString"
 #api2 sparse_scale,         "CSparseMatrixPtr a b -> Ptr b -> Ptr (CSparseMatrixPtr a b) -> IO CString"
 #api2 sparse_nonZeros,      "CSparseMatrixPtr a b -> Ptr CInt -> IO CString"
 #api2 sparse_innerSize,     "CSparseMatrixPtr a b -> Ptr CInt -> IO CString"

@@ -43,6 +43,7 @@ module Data.Eigen.SparseMatrix (
     mul,
     -- * Matrix transformations
     pruned,
+    prunedMul,
     scale,
     transpose,
     adjoint,
@@ -272,10 +273,6 @@ pruned r = _unop (\p pq -> alloca $ \pr -> poke pr (I.cast r) >> I.sparse_pruned
 -- | Suppresses all nonzeros in resultant matrix product less than `v`
 prunedMul :: I.Elem a b => a -> SparseMatrix a b -> SparseMatrix a b -> SparseMatrix a b
 prunedMul v = _binop (\p s pq -> alloca $ \pr -> poke pr (I.cast v) >> I.sparse_pruned_mul p s pr pq) _mk
-
--- | Matrix multiplication. You can use @(*)@ function as well.
--- mul :: I.Elem a b => SparseMatrix a b -> SparseMatrix a b -> SparseMatrix a b
--- mul = _binop I.sparse_mul _mk
 
 -- | Multiply matrix on a given scalar
 scale :: I.Elem a b => a -> SparseMatrix a b -> SparseMatrix a b
