@@ -155,7 +155,7 @@ SPARSE_BINOP(mul, *);
 template <class T>
 RET sparse_pruned_mul(void* p, void* q, void* v, void** pr) {
     typedef SparseMatrix<T> M;
-    *(M**)pr = new M((*(M*)p * *(M*)q).pruned(*(T*)v, T(1)));
+    *(M**)pr = new M((*(M*)p * *(M*)q).pruned(*(T*)v, 1));
     return 0;
 }
 API(sparse_pruned_mul, (int code, void* p, void* q, void* v, void** pr), (p, q, v, pr));
