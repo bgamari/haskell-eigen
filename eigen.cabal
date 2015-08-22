@@ -427,19 +427,31 @@ Test-Suite test-solve
     type:               exitcode-stdio-1.0
     main-is:            test/solve.hs
     build-depends:      base, primitive, vector, bytestring, transformers, binary, eigen
+    other-modules:      Data.Eigen.LA
+                      , Data.Eigen.Matrix
+                      , Data.Eigen.Matrix.Mutable
 
 Test-Suite test-solve-sparse
     type:               exitcode-stdio-1.0
     main-is:            test/solve-sparse.hs
     build-depends:      base, primitive, vector, bytestring, transformers, mtl, binary, eigen
-
+    other-modules:      Data.Eigen.Matrix
+                      , Data.Eigen.Matrix.Mutable
+                      , Data.Eigen.SparseLA
+                      , Data.Eigen.SparseMatrix
+                      , Data.Eigen.SparseMatrix.Mutable
 Test-Suite test-rank
     type:               exitcode-stdio-1.0
     main-is:            test/rank.hs
     build-depends:      base, primitive, vector, bytestring, transformers, binary, eigen
+    other-modules:      Data.Eigen.LA
+                      , Data.Eigen.Matrix
+                      , Data.Eigen.Matrix.Mutable
 
 Test-Suite test-regression
     type:               exitcode-stdio-1.0
     main-is:            test/regression.hs
     build-depends:      base, primitive, vector, bytestring, transformers, binary, eigen
-
+    other-modules:      Data.Eigen.LA
+                      , Data.Eigen.Matrix
+                      , Data.Eigen.Matrix.Mutable
