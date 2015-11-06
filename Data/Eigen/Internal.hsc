@@ -248,3 +248,6 @@ magicCode x = MagicCode (code x `xor` 0x45696730)
 #api3 sparse_la_logAbsDeterminant,  "CSolverPtr a b -> Ptr b -> IO CString"
 #api3 sparse_la_absDeterminant,     "CSolverPtr a b -> Ptr b -> IO CString"
 #api3 sparse_la_signDeterminant,    "CSolverPtr a b -> Ptr b -> IO CString"
+
+foreign import ccall unsafe "eigen_sparse_a_bt" sparse_a_bt
+    :: CFloat -> CSparseMatrixPtr Float CFloat -> CSparseMatrixPtr Float CFloat -> Ptr (CSparseMatrixPtr Float CFloat) -> IO CString

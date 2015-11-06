@@ -420,6 +420,7 @@ library
                         cbits/eigen-sparse.cpp
                         cbits/eigen-la.cpp
                         cbits/eigen-sparse-la.cpp
+                        cbits/eigen-sparse-sparse-product.cpp
     extra-libraries:    stdc++
 
 Test-Suite test-solve

@@ -41,6 +41,7 @@ module Data.Eigen.SparseMatrix (
     add,
     sub,
     mul,
+    sparseABt,
     -- * Matrix transformations
     pruned,
     prunedMul,
@@ -298,6 +299,15 @@ sub = _binop I.sparse_sub _mk
 mul :: I.Elem a b => SparseMatrix a b -> SparseMatrix a b -> SparseMatrix a b
 mul = _binop I.sparse_mul _mk
 
+-- | Compute @A B^T@ of two sparse matrices, pruning to the given precision.
+sparseABt :: Float -> SparseMatrixXf -> SparseMatrixXf -> SparseMatrixXf
+sparseABt thresh (SparseMatrix fpa) (SparseMatrix fpb) = I.performIO $
+  withForeignPtr fpa $ \pa ->
+  withForeignPtr fpb $ \pb ->
+    alloca $ \pq -> do
+      _msg <- I.sparse_a_bt (realToFrac thresh) pa pb pq
+      peek pq >>= _mk
+
 -- | Construct sparse matrix of given size from the list of triplets (row, col, val)
 fromList :: I.Elem a b => Int -> Int -> [(Int, Int, a)] -> SparseMatrix a b
 fromList rows cols = fromVector rows cols . VS.fromList . P.map I.cast
@@ -407,4 +417,3 @@ _map f m = fromVector (rows m) (cols m) . VS.map g . toVector $ m where
 
 _mk :: I.Elem a b => Ptr (I.CSparseMatrix a b) -> IO (SparseMatrix a b)
 _mk p = SparseMatrix <$> FC.newForeignPtr p (I.call $ I.sparse_free p)
-
