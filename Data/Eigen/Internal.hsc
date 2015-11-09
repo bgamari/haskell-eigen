@@ -82,6 +82,8 @@ instance Storable a => Storable (CTriplet a) where
 
 instance Cast CInt Int where; cast = fromIntegral
 instance Cast Int CInt where; cast = fromIntegral
+instance Cast CULong Word64 where; cast = fromIntegral
+instance Cast Word64 CULong where; cast = fromIntegral
 instance Cast CFloat Float where; cast (CFloat x) = x
 instance Cast Float CFloat where; cast = CFloat
 instance Cast CDouble Double where; cast (CDouble x) = x
@@ -219,7 +221,7 @@ magicCode x = MagicCode (code x `xor` 0x45696730)
 #api2 sparse_conservativeResize,    "CSparseMatrixPtr a b -> CInt -> CInt -> IO CString"
 #api2 sparse_compressInplace,       "CSparseMatrixPtr a b -> IO CString"
 #api2 sparse_uncompressInplace,     "CSparseMatrixPtr a b -> IO CString"
-
+#api2 sparse_storageSize,   "CSparseMatrixPtr a b -> Ptr CULong -> IO CString"
 
 #let api3 name, args = "foreign import ccall \"eigen_%s\" c_%s :: CInt -> CInt -> %s\n%s :: forall s a b . (Code s, Code b) => s -> %s\n%s s = c_%s (code (undefined :: b)) (code s)", #name, #name, args, #name, args, #name, #name
 

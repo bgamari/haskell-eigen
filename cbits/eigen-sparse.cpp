@@ -268,3 +268,11 @@ RET sparse_conservativeResize(void* p, int r, int c) {
     return 0;
 }
 API(sparse_conservativeResize, (int code, void* p, int r, int c), (p,r,c));
+
+template <class T>
+RET sparse_storageSize(void* m, void* ret) {
+  typedef SparseMatrix<T> Mat;
+  *(unsigned long *)ret = ((Mat*)m)->data().allocatedSize() * (sizeof(typename Mat::Index) + sizeof(typename Mat::Scalar));
+  return 0;
+}
+API(sparse_storageSize, (int code, void* p, void* ret), (p, ret));

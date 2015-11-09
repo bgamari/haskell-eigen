@@ -18,6 +18,7 @@ module Data.Eigen.SparseMatrix (
     -- * Accessing matrix data
     cols,
     rows,
+    storageSize,
     coeff,
     (!),
     -- * Matrix conversions
@@ -213,6 +214,10 @@ rows = _unop I.sparse_rows (return . I.cast)
 -- | Number of columns for the sparse matrix
 cols :: I.Elem a b => SparseMatrix a b -> Int
 cols = _unop I.sparse_cols (return . I.cast)
+
+-- | Number of bytse allocated for the representation of the matrix
+storageSize :: I.Elem a b => SparseMatrix a b -> Word64
+storageSize = _unop I.sparse_storageSize (return . I.cast)
 
 -- | Matrix coefficient at given row and col
 coeff :: I.Elem a b => Int -> Int -> SparseMatrix a b -> a
